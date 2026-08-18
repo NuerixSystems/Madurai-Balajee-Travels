@@ -1,0 +1,330 @@
+/* ===============================
+   FLOATING BUTTONS - Premium Version (No Badge)
+================================= */
+
+.floating-buttons {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 1200;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-buttons.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+.floating-buttons.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+}
+
+/* ===============================
+   Button Styles
+================================= */
+
+.floating-buttons__btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.floating-buttons__btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.floating-buttons__btn:active {
+  transform: scale(0.95);
+}
+
+/* WhatsApp Button */
+.floating-buttons__btn--whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  animation: bounceIn 0.6s ease 0.2s both;
+}
+
+.floating-buttons__btn--whatsapp:hover {
+  background: linear-gradient(135deg, #30d96e, #1a9d8a);
+  border-color: rgba(37, 211, 102, 0.5);
+}
+
+/* Call Button */
+.floating-buttons__btn--call {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  animation: bounceIn 0.6s ease 0.4s both;
+}
+
+.floating-buttons__btn--call:hover {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-color: rgba(37, 99, 235, 0.5);
+}
+
+/* ===============================
+   Pulse Animation Ring
+================================= */
+
+.floating-buttons__btn::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2.5s ease-out infinite;
+}
+
+.floating-buttons__btn--whatsapp::before {
+  background: #25D366;
+  box-shadow: 0 0 30px rgba(37, 211, 102, 0.3);
+}
+
+.floating-buttons__btn--call::before {
+  background: #2563eb;
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+}
+
+/* Second pulse ring for WhatsApp */
+.floating-buttons__btn--whatsapp::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  z-index: -2;
+  background: #25D366;
+  animation: pulse 2.5s ease-out infinite 0.5s;
+  opacity: 0;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* ===============================
+   Tooltip
+================================= */
+
+.floating-buttons__tooltip {
+  position: absolute;
+  right: 68px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.floating-buttons__btn:hover .floating-buttons__tooltip {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.floating-buttons__tooltip::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid rgba(0, 0, 0, 0.85);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* ===============================
+   BADGE - REMOVED (Commented Out)
+================================= */
+
+/* .floating-buttons__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+} */
+
+/* ===============================
+   Bounce In Animation
+================================= */
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===============================
+   Loading Shimmer Effect
+================================= */
+
+.floating-buttons__btn--whatsapp .FaWhatsapp,
+.floating-buttons__btn--call .FaPhoneAlt {
+  transition: transform 0.3s ease;
+}
+
+.floating-buttons__btn:hover .FaWhatsapp,
+.floating-buttons__btn:hover .FaPhoneAlt {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* ===============================
+   Responsive Design
+================================= */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .floating-buttons {
+    right: 20px;
+    bottom: 20px;
+    gap: 12px;
+  }
+  
+  .floating-buttons__btn {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+  
+  .floating-buttons__tooltip {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .floating-buttons {
+    right: 16px;
+    bottom: 16px;
+    gap: 10px;
+  }
+  
+  .floating-buttons__btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+    border-width: 1.5px;
+  }
+  
+  .floating-buttons__btn::before {
+    inset: -2px;
+  }
+  
+  .floating-buttons__btn--whatsapp::after {
+    inset: -4px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .floating-buttons {
+    right: 12px;
+    bottom: 12px;
+    gap: 8px;
+  }
+  
+  .floating-buttons__btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+}
+
+/* ===============================
+   Reduced Motion Preferences
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-buttons__btn::before,
+  .floating-buttons__btn--whatsapp::after {
+    animation: none;
+  }
+  
+  .floating-buttons__btn {
+    animation: none;
+  }
+  
+  .floating-buttons {
+    transition: none;
+  }
+}
+
+/* ===============================
+   Dark Mode Support
+================================= */
+
+@media (prefers-color-scheme: dark) {
+  .floating-buttons__btn {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .floating-buttons__tooltip {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .floating-buttons__tooltip::after {
+    border-left-color: rgba(0, 0, 0, 0.9);
+  }
+}

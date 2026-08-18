@@ -436,8 +436,9 @@ button {
 
 .hero-cta {
   display: flex;
-  gap: 1rem;
+  gap: 15px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .btn {
@@ -4148,18 +4149,19 @@ button {
 @media (max-width: 480px) {
   .hero-cta {
     gap: 0.7rem;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .hero-cta .btn {
-    flex: 1 1 0;
+    flex: 0 1 auto;
     min-width: 0;
-    max-width: 220px;
-    padding: 0.8rem 0.6rem;
+    max-width: 100%;
+    padding: 0.8rem 1rem;
     font-size: 0.88rem;
     justify-content: center;
     gap: 0.4rem;
   }
+
 
   .hero-cta .btn i {
     font-size: 0.85rem;
@@ -4308,4 +4310,27 @@ button {
   color: var(--secondary);
   font-size: 0.95rem;
   font-weight: 700;
+}
+.tariff-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tariff-btn i {
+  margin-right: 8px;
+}
+@media (max-width: 768px) {
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
 }

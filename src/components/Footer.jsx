@@ -44,9 +44,9 @@ export default function Footer() {
       <div className="footer-main footer-main-wide">
         <div className="footer-brand-col">
           <div className="footer-brand">
-            <img src="/Images/logo.jpg" alt="Madurai Balaje" className="footer-logo" />
+            <img src="/Images/logo.jpg" alt="Chennai Bus Rental" className="footer-logo" />
             <div>
-              <h3>Madurai Balaje</h3>
+              <h3>Chennai Bus Rental</h3>
               <p>Travel with Pride · Your Journey, Our Priority</p>
             </div>
           </div>
@@ -144,10 +144,10 @@ export default function Footer() {
             <h4><i className="fas fa-building"></i> Chennai Head Office</h4>
             <p>G14 &amp; G15, Sriji Majestic Complex<br />Koyambedu, Chennai – 600107</p>
           </div>
-          <div className="office">
+          {/* <div className="office">
             <h4><i className="fas fa-building"></i> Madurai Head Office</h4>
             <p>Corp-145 DPP Chavadi<br />Madurai – 625016</p>
-          </div>
+          </div> */}
           <div className="office">
             <h4><i className="fas fa-phone-alt"></i> Talk to Us</h4>
             <p><a href="tel:+919791135678">+91 97911 35678</a></p>
@@ -172,7 +172,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Madurai Balaje Tours &amp; Travels
+            Chennai Bus Rental Tours &amp; Travels
           </a>
           . All Rights Reserved.
         </p>

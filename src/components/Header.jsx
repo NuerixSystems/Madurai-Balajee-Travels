@@ -121,10 +121,10 @@ export default function Header() {
       <div className="header-container">
         <Link to="/" className="brand" onClick={closeAll}>
           <div className="logo-wrap">
-            <img src="/Images/bus1.jpg" alt="Madurai Balaje Logo" className="logo-image" />
+            <img src="/Images/bus1.jpg" alt="Chennai Bus Rental Logo" className="logo-image" />
           </div>
           <div className="brand-text">
-            <p className="brand-name">MADURAI BALAJE</p>
+            <p className="brand-name">Chennai Bus Rental</p>
             <div className="tagline"><span className="highlight">Travel with Pride</span></div>
           </div>
         </Link>

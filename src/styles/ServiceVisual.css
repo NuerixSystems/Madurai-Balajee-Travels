@@ -1,0 +1,278 @@
+.service-visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg, 24px);
+  overflow: hidden;
+  background: var(--gradient-primary, linear-gradient(135deg, #1E40AF 0%, #6D28D9 100%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-visual:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 60px rgba(30, 64, 175, 0.28);
+}
+
+.service-visual--b {
+  background: linear-gradient(135deg, #0f172a 0%, #1E40AF 55%, #10B981 130%);
+}
+
+.service-visual__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.6;
+}
+
+.service-visual__shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0px);
+}
+
+.service-visual__shape--1 {
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.14);
+  top: -40px;
+  right: -30px;
+  animation: serviceVisualFloat 7s ease-in-out infinite;
+}
+
+.service-visual__shape--2 {
+  width: 120px;
+  height: 120px;
+  background: rgba(16, 185, 129, 0.25);
+  bottom: -30px;
+  left: -20px;
+  animation: serviceVisualFloat 9s ease-in-out infinite reverse;
+}
+
+.service-visual--b .service-visual__shape--2 {
+  background: rgba(249, 168, 37, 0.25);
+}
+
+@keyframes serviceVisualFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, 14px); }
+}
+
+.service-visual__icon-wrap {
+  position: relative;
+  z-index: 2;
+  width: 96px;
+  height: 96px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+  animation: serviceVisualPulse 3.2s ease-in-out infinite;
+}
+
+.service-visual:hover .service-visual__icon-wrap {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.service-visual__icon {
+  font-size: 2.6rem;
+  color: #fff;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+}
+
+@keyframes serviceVisualPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.055); }
+}
+
+/* ---------- Rotating dashed orbit ring around the icon ---------- */
+
+.service-visual__orbit {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-visual__orbit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.32);
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: serviceVisualSpin 16s linear infinite;
+}
+
+.service-visual__orbit::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes serviceVisualSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ---------- Corner brackets — viewfinder / scanner accent ---------- */
+
+.service-visual__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.service-visual__corner--tl {
+  top: 16px;
+  left: 16px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+}
+
+.service-visual__corner--tr {
+  top: 16px;
+  right: 16px;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 6px;
+}
+
+.service-visual__corner--bl {
+  bottom: 16px;
+  left: 16px;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 6px;
+}
+
+.service-visual__corner--br {
+  bottom: 16px;
+  right: 16px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 6px;
+}
+
+/* ---------- Sweeping scan line ---------- */
+
+.service-visual__scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 46%;
+  top: -50%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+  animation: serviceVisualScan 5s ease-in-out infinite;
+}
+
+@keyframes serviceVisualScan {
+  0% { top: -50%; }
+  55%, 100% { top: 105%; }
+}
+
+/* ---------- Floating orbit particles ---------- */
+
+.service-visual__particle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.55);
+  z-index: 2;
+}
+
+.service-visual__particle--1 {
+  top: 22%;
+  left: 20%;
+  animation: serviceVisualDrift 6s ease-in-out infinite;
+}
+
+.service-visual__particle--2 {
+  bottom: 26%;
+  right: 22%;
+  width: 5px;
+  height: 5px;
+  background: rgba(16, 185, 129, 0.9);
+  box-shadow: 0 0 10px 2px rgba(16, 185, 129, 0.5);
+  animation: serviceVisualDrift 7.5s ease-in-out infinite reverse;
+}
+
+.service-visual__particle--3 {
+  top: 62%;
+  left: 14%;
+  width: 4px;
+  height: 4px;
+  animation: serviceVisualDrift 5s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+@keyframes serviceVisualDrift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.9; }
+  50% { transform: translate(14px, -10px); opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-visual__shape,
+  .service-visual__icon-wrap,
+  .service-visual__orbit::before,
+  .service-visual__scan,
+  .service-visual__particle {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-visual__icon-wrap {
+    width: 76px;
+    height: 76px;
+    border-radius: 20px;
+  }
+  .service-visual__icon {
+    font-size: 2.1rem;
+  }
+  .service-visual__orbit::before {
+    width: 118px;
+    height: 118px;
+  }
+  .service-visual__orbit::after {
+    width: 96px;
+    height: 96px;
+  }
+  .service-visual__corner {
+    width: 16px;
+    height: 16px;
+  }
+}

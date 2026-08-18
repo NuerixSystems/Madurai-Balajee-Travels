@@ -1,0 +1,54 @@
+.floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-size: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-icon--top-left {
+  top: 10%;
+  left: 5%;
+}
+
+.floating-icon--top-right {
+  top: 10%;
+  right: 5%;
+}
+
+.floating-icon--bottom-left {
+  bottom: 10%;
+  left: 5%;
+}
+
+.floating-icon--bottom-right {
+  bottom: 10%;
+  right: 5%;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}

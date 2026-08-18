@@ -1,0 +1,565 @@
+/* Refined About.css - Reduced Padding */
+
+/* Homepage summary/teaser CTA (variant="summary") */
+.about__home-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.about {
+  position: relative;
+  padding: 20px 0 50px;
+  padding-top: 100px; /* Fixed: Added top padding to prevent content from going behind navbar */
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
+}
+
+/* Add this new rule to fix mobile alignment */
+.about > *:first-child {
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+/* Animated background particles - Smaller & Subtler */
+.about::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 70%);
+  border-radius: 50%;
+  animation: floatBubble 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+.about::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  left: -120px;
+  bottom: -120px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.06), transparent 70%);
+  border-radius: 50%;
+  animation: floatBubble 25s ease-in-out infinite reverse;
+  z-index: 0;
+}
+
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(15px, -15px) scale(1.05);
+  }
+}
+
+/* Section Header - Reduced spacing */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: linear-gradient(135deg, #2563eb15, #06b6d415);
+  padding: 6px 20px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.section-title span {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.section-description {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Grid Layout - Better proportions */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Content Section */
+.about__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about__content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111827;
+  position: relative;
+  display: inline-block;
+}
+
+.about__content h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  border-radius: 3px;
+}
+
+.about__content p {
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+}
+
+/* Small List Items */
+.about__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.about__list li {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.06);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: #1f2937;
+  cursor: default;
+}
+
+.about__list li:hover {
+  transform: translateY(-2px);
+  border-color: rgba(37, 99, 235, 0.15);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.about__list li svg {
+  color: #10b981;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Small Cards */
+.about__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about__info-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.06);
+  border-radius: 14px;
+  padding: 18px 22px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.about__info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.1);
+}
+
+.card-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.mission-icon {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(37, 99, 235, 0.05));
+}
+
+.vision-icon {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(6, 182, 212, 0.05));
+}
+
+.about__info-card:hover .card-icon-wrapper {
+  transform: scale(1.05);
+}
+
+.about__card-icon {
+  font-size: 18px;
+}
+
+.mission-icon .about__card-icon {
+  color: #2563eb;
+}
+
+.vision-icon .about__card-icon {
+  color: #06b6d4;
+}
+
+.about__info-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.about__info-card p {
+  color: #6b7280;
+  line-height: 1.5;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Responsive Design */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1024px) {
+  .about {
+    padding: 20px 0 40px;
+    padding-top: 100px; /* Fixed: Added top padding for tablet */
+  }
+  
+  .about__grid {
+    gap: 30px;
+  }
+  
+  .container {
+    padding: 0 30px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .about {
+    padding-top: 100px; /* Fixed: Added top padding for tablet */
+  }
+  
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .about__content {
+    text-align: center;
+  }
+  
+  .about__content h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .about__cards {
+    flex-direction: row;
+    gap: 14px;
+  }
+  
+  .about__info-card {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .card-icon-wrapper {
+    margin: 0 auto 8px;
+  }
+  
+  .about__list {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .about {
+    padding: 15px 0 30px;
+    padding-top: 110px; /* Fixed: Added extra top padding on mobile */
+  }
+  
+  /* Add this to ensure first child has proper spacing */
+  .about > *:first-child {
+    padding-top: 20px;
+    margin-top: 0;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .section-header {
+    margin-bottom: 25px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-description {
+    font-size: 0.9rem;
+  }
+  
+  .eyebrow {
+    font-size: 10px;
+    padding: 5px 16px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+  
+  .about__content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .about__content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .about__list {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  
+  .about__list li {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    justify-content: center;
+    border-radius: 6px;
+  }
+  
+  .about__list li svg {
+    font-size: 12px;
+  }
+  
+  .about__cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .about__info-card {
+    padding: 16px 18px;
+    text-align: center;
+    border-radius: 12px;
+  }
+  
+  .about__info-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  .about__info-card p {
+    font-size: 0.82rem;
+  }
+  
+  .card-icon-wrapper {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    margin: 0 auto 8px;
+  }
+  
+  .about__card-icon {
+    font-size: 16px;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+  .about {
+    padding: 10px 0 20px;
+    padding-top: 110px; /* Fixed: Added extra top padding for small mobile */
+  }
+  
+  /* Add this to ensure first child has proper spacing */
+  .about > *:first-child {
+    padding-top: 25px;
+    margin-top: 0;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section-header {
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-description {
+    font-size: 0.85rem;
+  }
+  
+  .eyebrow {
+    font-size: 9px;
+    padding: 4px 12px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  
+  .about__content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .about__content h3::after {
+    width: 30px;
+    height: 2px;
+    bottom: -4px;
+  }
+  
+  .about__content p {
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+  
+  .about__list {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .about__list li {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    justify-content: flex-start;
+    border-radius: 6px;
+  }
+  
+  .about__list li svg {
+    font-size: 12px;
+  }
+  
+  .about__cards {
+    gap: 10px;
+  }
+  
+  .about__info-card {
+    padding: 14px 14px;
+    border-radius: 10px;
+  }
+  
+  .about__info-card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  
+  .about__info-card p {
+    font-size: 0.78rem;
+  }
+  
+  .card-icon-wrapper {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    margin: 0 auto 6px;
+  }
+  
+  .about__card-icon {
+    font-size: 14px;
+  }
+  
+  .about__grid {
+    gap: 20px;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width: 360px) {
+  .about {
+    padding: 8px 0 16px;
+    padding-top: 100px; /* Fixed: Added extra top padding for extra small mobile */
+  }
+  
+  /* Add this to ensure first child has proper spacing */
+  .about > *:first-child {
+    padding-top: 30px;
+    margin-top: 0;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .about__content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .about__list li {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+  
+  .about__info-card {
+    padding: 12px 12px;
+  }
+  
+  .about__info-card h3 {
+    font-size: 0.8rem;
+  }
+  
+  .about__info-card p {
+    font-size: 0.72rem;
+  }
+  
+  .card-icon-wrapper {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+  }
+  
+  .about__card-icon {
+    font-size: 12px;
+  }
+}
+
+/* Add scroll margin for navbar */
+#about {
+  scroll-margin-top: 50px;
+}

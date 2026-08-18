@@ -1,0 +1,767 @@
+/* Premium Contact.css - Enhanced Version */
+
+.contact {
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Homepage summary/teaser (variant="summary"): quick actions instead of
+   the full contact info block + message form. */
+.contact__home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.contact__home-actions .contact__call-btn,
+.contact__home-actions .contact__whatsapp-btn {
+  position: static;
+  /* Override the /contact page's `flex: 1` (below) for this 3-item
+     homepage row — flex:1 with a third non-flex "Send a Message" button
+     was squeezing these two down to near-zero width and wrapping their
+     text one word per line on smaller screens. Size to content instead. */
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+/* Background decorative elements */
+.contact::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: -150px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05), transparent 70%);
+  border-radius: 50%;
+  animation: floatBubble 20s ease-in-out infinite;
+}
+
+.contact::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  left: -100px;
+  bottom: -100px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.05), transparent 70%);
+  border-radius: 50%;
+  animation: floatBubble 25s ease-in-out infinite reverse;
+}
+
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: linear-gradient(135deg, #2563eb15, #06b6d415);
+  padding: 8px 24px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.section-title span {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.section-description {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* Contact Grid */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Contact Info Section */
+.contact__info-wrapper {
+  position: sticky;
+  top: 30px;
+}
+
+.contact__info {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8, #1e40af);
+  border-radius: 24px;
+  padding: 40px 35px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 15px 50px rgba(37, 99, 235, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__info::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+  border-radius: 50%;
+}
+
+.contact__info::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: -100px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+  border-radius: 50%;
+}
+
+.contact__info-header {
+  position: relative;
+  z-index: 1;
+}
+
+.contact__info-header h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.contact__info-header p {
+  opacity: 0.85;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Info Items */
+.contact__info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact__info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.contact__info-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+.contact__info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.phone-icon { background: rgba(16, 185, 129, 0.3); }
+.email-icon { background: rgba(59, 130, 246, 0.3); }
+.location-icon { background: rgba(245, 158, 11, 0.3); }
+.hours-icon { background: rgba(139, 92, 246, 0.3); }
+
+.contact__info-item:hover .contact__info-icon {
+  transform: scale(1.1);
+}
+
+.contact__info-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.contact__info-item a,
+.contact__info-item span {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact__info-item a:hover {
+  opacity: 0.8;
+}
+
+/* Info Actions */
+.contact__info-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact__call-btn,
+.contact__whatsapp-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.contact__call-btn {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact__call-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  gap: 12px;
+}
+
+.contact__whatsapp-btn {
+  background: rgba(37, 211, 102, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.contact__whatsapp-btn:hover {
+  background: rgba(37, 211, 102, 0.3);
+  transform: translateY(-2px);
+  gap: 12px;
+}
+
+/* Contact Form */
+.contact__form {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  border-radius: 24px;
+  padding: 40px 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.contact__form:hover {
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.06);
+}
+
+.contact__form-header {
+  margin-bottom: 28px;
+}
+
+.contact__form-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.contact__form-header p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.contact__form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.contact__field {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact__field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  transition: color 0.3s ease;
+}
+
+.contact__field:focus-within label {
+  color: #2563eb;
+}
+
+.contact__field input,
+.contact__field textarea {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+  resize: vertical;
+  color: #111827;
+}
+
+.contact__field input:hover,
+.contact__field textarea:hover {
+  border-color: #d1d5db;
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.contact__field input.has-value,
+.contact__field textarea.has-value {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+.contact__field input::placeholder,
+.contact__field textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Submit Button */
+.contact__submit {
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.contact__submit:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.contact__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+.contact__submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.contact__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.contact__submit.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.contact__submit.success:hover {
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.submit-icon {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.contact__submit:hover:not(:disabled) .submit-icon {
+  transform: translateX(4px);
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.checkmark {
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+
+/* Large Tablets & Small Laptops */
+@media (max-width: 1100px) {
+  .contact {
+    padding: 60px 0;
+  }
+  
+  .contact__grid {
+    gap: 35px;
+  }
+  
+  .container {
+    padding: 0 30px;
+  }
+  
+  .contact__info {
+    padding: 35px 28px;
+  }
+  
+  .contact__form {
+    padding: 35px 28px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact__info-wrapper {
+    position: static;
+  }
+  
+  .contact__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .contact__info-header {
+    grid-column: 1 / -1;
+  }
+  
+  .contact__info-items {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .contact__info-actions {
+    grid-column: 1 / -1;
+  }
+  
+  .contact__info-item {
+    padding: 10px 14px;
+  }
+  
+  .contact__form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .contact {
+    padding: 50px 0;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .section-header {
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-description {
+    font-size: 0.95rem;
+  }
+  
+  .eyebrow {
+    font-size: 11px;
+    padding: 6px 18px;
+    letter-spacing: 2px;
+  }
+  
+  .contact__info {
+    padding: 30px 24px;
+    gap: 16px;
+  }
+  
+  .contact__info-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .contact__info-item {
+    padding: 10px 12px;
+  }
+  
+  .contact__info-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+  
+  .contact__info-item a,
+  .contact__info-item span {
+    font-size: 0.85rem;
+  }
+  
+  .contact__call-btn,
+  .contact__whatsapp-btn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .contact__form {
+    padding: 30px 24px;
+  }
+  
+  .contact__form-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .contact__form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 600px) {
+  .contact__info {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact__info-items {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section-header {
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 1.7rem;
+  }
+  
+  .section-description {
+    font-size: 0.9rem;
+  }
+  
+  .eyebrow {
+    font-size: 10px;
+    padding: 5px 14px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  
+  .contact__grid {
+    gap: 30px;
+  }
+  
+  .contact__info {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  
+  .contact__info-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .contact__info-header p {
+    font-size: 0.85rem;
+  }
+  
+  .contact__info-items {
+    gap: 12px;
+  }
+  
+  .contact__info-item {
+    padding: 8px 12px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+  
+  .contact__info-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+  }
+  
+  .contact__info-label {
+    font-size: 0.6rem;
+  }
+  
+  .contact__info-item a,
+  .contact__info-item span {
+    font-size: 0.8rem;
+  }
+  
+  .contact__info-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .contact__call-btn,
+  .contact__whatsapp-btn {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .contact__form {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  
+  .contact__form-header {
+    margin-bottom: 20px;
+  }
+  
+  .contact__form-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .contact__form-header p {
+    font-size: 0.85rem;
+  }
+  
+  .contact__field {
+    margin-bottom: 14px;
+  }
+  
+  .contact__field label {
+    font-size: 0.8rem;
+  }
+  
+  .contact__field input,
+  .contact__field textarea {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+  
+  .contact__submit {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width: 360px) {
+  .contact {
+    padding: 30px 0;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .contact__info {
+    padding: 20px 16px;
+  }
+  
+  .contact__form {
+    padding: 20px 16px;
+  }
+  
+  .contact__info-item {
+    padding: 6px 10px;
+  }
+  
+  .contact__info-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+}

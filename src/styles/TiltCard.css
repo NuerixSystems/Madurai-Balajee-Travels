@@ -1,0 +1,10 @@
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-card__glare {
+  pointer-events: none;
+  border-radius: inherit;
+}

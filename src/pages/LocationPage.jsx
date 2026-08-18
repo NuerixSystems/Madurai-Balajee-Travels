@@ -97,7 +97,7 @@ export default function LocationPage() {
   return (
     <>
       <Helmet>
-        <title>{`AC Bus Rent in ${name} | Chennai Bus Rental`}</title>
+        <title>{`AC & Non-AC Bus Rent in ${name} - 97911 35678`}</title>
         <meta
           name="description"
           content={`Book AC & Non-AC buses in ${name} with Chennai Bus Rental. Corporate, wedding, and outstation bus hire with professional drivers. Call for instant booking.`}
@@ -139,20 +139,25 @@ export default function LocationPage() {
             Transparent pricing, licensed drivers, and fast service for weddings,
             corporate trips, school tours, and outstation journeys.
           </p>
-
           <div className="hero-cta">
-            <a href="tel:+919791135678" className="btn btn-primary">
-              <i className="fas fa-phone-alt"></i> Call Now
-            </a>
-            <a
-              href="https://wa.me/919791135678"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-whatsapp"
-            >
-              <i className="fab fa-whatsapp"></i> WhatsApp
-            </a>
-          </div>
+  <a href="tel:+919791135678" className="btn btn-primary">
+    <i className="fas fa-phone-alt"></i> Call Now
+  </a>
+
+  <a
+    href="https://wa.me/919791135678"
+    target="_blank"
+    rel="noreferrer"
+    className="btn btn-whatsapp"
+  >
+    <i className="fab fa-whatsapp"></i> WhatsApp
+  </a>
+
+  <a href="/tariff" className="btn btn-primary">
+  <i className="fas fa-list"></i> Full Tariff &amp; Tour Packages
+</a>
+</div>
+
         </section>
 
         <section className="location-body">

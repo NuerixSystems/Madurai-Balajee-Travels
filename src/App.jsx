@@ -25,7 +25,7 @@ export default function App() {
       <CanonicalTag />
       <Header />
       <Routes>
-  <Route path="/" element={<Tariff />} />
+  <Route path="/" element={<Home />} />
   <Route path="/home" element={<Home />} />
   <Route path="/home/:section" element={<Home />} />
   <Route path="/:section" element={<Home />} />

@@ -1,0 +1,585 @@
+/* Premium Footer.css - Mobile Row Wise */
+
+.footer {
+  background: #0B1220;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 50px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gradient line at top */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #2563eb 20%, 
+    #06b6d4 40%, 
+    #8b5cf6 60%, 
+    #2563eb 80%, 
+    transparent 100%
+  );
+}
+
+/* Footer Grid */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 50px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Brand Column */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  /* Original logo colors (icon gradient + navy wordmark, same as the
+     navbar) need a light backdrop to stay visible on the dark footer —
+     same treatment as the white navbar, just scoped to the logo itself. */
+  background: #ffffff;
+  padding: 10px 18px;
+  border-radius: 14px;
+  width: fit-content;
+}
+
+.footer__logo-img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.footer__brand-description {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 300px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Contact Info */
+.footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__contact-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__contact-item a:hover {
+  color: #2563eb;
+}
+
+.footer__contact-icon {
+  color: #2563eb;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+/* Social Icons */
+.footer__socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.social-link:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: translateY(-3px);
+  border-color: #2563eb;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Links Wrapper - Desktop Grid */
+.footer__links-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Footer Columns */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__col h4 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.footer__col h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  border-radius: 2px;
+}
+
+.footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__col ul li {
+  line-height: 1;
+}
+
+.footer__col ul li a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer__col ul li a:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* Phone Button */
+.footer__phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+  margin-top: 14px;
+  width: fit-content;
+}
+
+.footer__phone-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+  gap: 12px;
+}
+
+/* Footer Bottom */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer__copyright {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+.footer__bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__bottom-links a {
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  font-size: 0.78rem;
+  transition: color 0.3s ease;
+}
+
+.footer__bottom-links a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Privacy Policy / Terms of Service: no page exists yet, so these render
+   as plain (non-clickable) text instead of dead "#" links. Same visual
+   treatment as the links above, minus the pointer/hover affordance. */
+.footer__bottom-text {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.78rem;
+}
+
+.footer__bottom-divider {
+  color: rgba(255, 255, 255, 0.08);
+  font-size: 0.7rem;
+}
+
+/* Back to Top Button */
+.footer__back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+  z-index: 1000;
+}
+
+.footer__back-to-top:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .footer__grid {
+    gap: 35px;
+  }
+  
+  .footer__links-wrapper {
+    gap: 20px;
+  }
+}
+
+/* Tablets Small */
+@media (max-width: 900px) {
+  .footer {
+    padding-top: 40px;
+  }
+  
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+  
+  .footer__brand-description {
+    max-width: 100%;
+  }
+  
+  .footer__contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+  }
+  
+  .footer__links-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .container {
+    padding: 0 30px;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 35px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .footer__grid {
+    gap: 28px;
+    padding-bottom: 28px;
+  }
+  
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+  
+  .footer__contact-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Mobile - Row Wise Layout */
+  .footer__links-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .footer__col {
+    text-align: left;
+  }
+  
+  .footer__col h4::after {
+    left: 0;
+    transform: none;
+  }
+  
+  .footer__col ul {
+    align-items: flex-start;
+  }
+  
+  .footer__col ul li a:hover {
+    transform: translateX(4px);
+  }
+  
+  .footer__phone-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px 0 20px;
+  }
+  
+  .footer__bottom-links {
+    justify-content: center;
+  }
+  
+  .footer__back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 560px) {
+  .footer__grid {
+    gap: 24px;
+  }
+  
+  /* Mobile - 3 Columns Row Wise */
+  .footer__links-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .footer__col {
+    text-align: left;
+    min-width: 0;
+  }
+  
+  .footer__col h4 {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+  }
+  
+  .footer__col h4::after {
+    width: 18px;
+    height: 2px;
+  }
+  
+  .footer__col ul {
+    gap: 4px;
+  }
+  
+  .footer__col ul li a {
+    font-size: 0.7rem;
+  }
+  
+  .footer__phone-btn {
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    margin-top: 8px;
+  }
+  
+  .footer__socials {
+    justify-content: center;
+  }
+  
+  .footer__contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer__brand-description {
+    text-align: left;
+  }
+  
+  .footer__bottom-links {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .footer__bottom-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding-top: 28px;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .footer__grid {
+    gap: 20px;
+    padding-bottom: 22px;
+  }
+  
+  .footer__logo-img {
+    height: 32px;
+  }
+  
+  .footer__brand-description {
+    font-size: 0.82rem;
+  }
+  
+  /* Mobile - 3 Columns Row Wise */
+  .footer__links-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .footer__col h4 {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+  }
+  
+  .footer__col h4::after {
+    width: 15px;
+    height: 2px;
+  }
+  
+  .footer__col ul li a {
+    font-size: 0.68rem;
+  }
+  
+  .footer__phone-btn {
+    font-size: 0.68rem;
+    padding: 5px 12px;
+  }
+  
+  .footer__contact-item {
+    font-size: 0.78rem;
+  }
+  
+  .social-link {
+    width: 34px;
+    height: 34px;
+    font-size: 0.75rem;
+  }
+  
+  .footer__copyright {
+    font-size: 0.75rem;
+  }
+  
+  .footer__bottom-links a,
+  .footer__bottom-links .footer__bottom-text {
+    font-size: 0.72rem;
+  }
+  
+  .footer__back-to-top {
+    bottom: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width: 380px) {
+  .footer__logo-img {
+    height: 28px;
+  }
+  
+  /* Mobile - 3 Columns Row Wise */
+  .footer__links-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .footer__col h4 {
+    font-size: 0.65rem;
+  }
+  
+  .footer__col ul li a {
+    font-size: 0.6rem;
+  }
+  
+  .social-link {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+}
