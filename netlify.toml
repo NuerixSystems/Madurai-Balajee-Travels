@@ -1,16 +1,6 @@
-# Netlify configuration
-#
-# This file currently only adds long-term caching for build output that is
-# content-hashed by Vite (everything under /assets/*, e.g. index-abc123.js,
-# index-abc123.css, and imported image assets). Those filenames change
-# whenever their content changes, so they are safe to cache "forever".
-#
-# Intentionally NOT included here (left as Netlify defaults / existing files):
-# - Routing / SPA redirects: handled by public/_redirects (untouched)
-# - HTML documents (e.g. index.html): must stay revalidated on every visit
-#   so users always get the latest app shell, so no cache rule is added here
-# - sitemap.xml / robots.txt: left uncached / at Netlify defaults
-# - Any other headers, build command, or publish directory settings
+[build]
+  command = "npm run build"
+  publish = "dist"
 
 [[headers]]
   for = "/assets/*"
