@@ -125,7 +125,7 @@ export default function QuickQueryPopup() {
       };
 
       const response = await fetch(
-        `${API_BASE_URL}/api/quick-query`,
+        `https://crm-dkc2.onrender.com/api/quick-query`,
         {
           method: "POST",
           headers: {
