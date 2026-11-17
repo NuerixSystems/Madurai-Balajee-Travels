@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -12,65 +13,99 @@ import AreasPreview from "../components/AreasPreview.jsx";
 import WhyUs from "../components/WhyUs.jsx";
 import Testimonials from "../components/Testimonials.jsx";
 import Contact from "../components/Contact.jsx";
+import QuickQueryPopup from "../components/QuickQueryPopup.jsx";
 
 export default function Home() {
   const { pathname } = useLocation();
 
- useEffect(() => {
-  const segments = pathname.split("/").filter(Boolean);
-  const section =
-    segments[0] === "home" ? segments[1] : segments[0];
+  useEffect(() => {
+    const segments = pathname.split("/").filter(Boolean);
 
-  // "/" or "/home" -> no section -> scroll to top
-  // "/local-tariff" -> section is "local-tariff"
-  // "/home/packages" -> section is "packages"
-  if (section) {
-    const el = document.getElementById(section);
+    const section =
+      segments[0] === "home" ? segments[1] : segments[0];
 
-    if (el) {
-      setTimeout(() => {
-        const header = document.getElementById("header");
-        const offset = (header?.offsetHeight || 0) + 16;
+    if (section) {
+      const scrollToSection = () => {
+        const element = document.getElementById(section);
 
-        const target =
-          el.getBoundingClientRect().top + window.pageYOffset - offset;
+        if (element) {
+          const header = document.getElementById("header");
+          const offset = (header?.offsetHeight || 0) + 16;
 
-        window.scrollTo({
-          top: target,
-          behavior: "smooth",
-        });
-      }, 100);
+          const target =
+            element.getBoundingClientRect().top +
+            window.pageYOffset -
+            offset;
+
+          window.scrollTo({
+            top: target,
+            behavior: "smooth",
+          });
+        }
+      };
+
+      const timeout = setTimeout(scrollToSection, 100);
+
+      return () => clearTimeout(timeout);
     }
-  } else {
+
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  }
-}, [pathname]);
+  }, [pathname]);
 
   return (
     <>
       <Helmet>
-        <title>Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours &amp; Travels</title>
+        <title>
+          Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours &amp; Travels
+        </title>
+
         <meta
           name="description"
           content="Trusted Chennai bus rental for AC & Non-AC coaches. Tourist bus rental Chennai, wedding, corporate, and outstation bus hire in Chennai with transparent pricing and professional drivers."
         />
-        <link rel="canonical" href="https://chennaibusrental.in/home" />
+
+        <link
+          rel="canonical"
+          href="https://chennaibusrental.in/home"
+        />
+
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours & Travels" />
+
+        <meta
+          property="og:title"
+          content="Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours & Travels"
+        />
+
         <meta
           property="og:description"
           content="Trusted Chennai bus rental for AC & Non-AC coaches. Tourist bus rental Chennai, wedding, corporate, and outstation bus hire in Chennai with transparent pricing and professional drivers."
         />
-        <meta property="og:url" content="https://chennaibusrental.in/home" />
-        <meta property="og:image" content="https://chennaibusrental.in/Images/logo.jpg" />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours & Travels" />
+        <meta
+          property="og:url"
+          content="https://chennaibusrental.in/home"
+        />
+
+        <meta
+          property="og:image"
+          content="https://chennaibusrental.in/Images/logo.jpg"
+        />
+
+        <meta
+          name="twitter:card"
+          content="summary_large_image"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Bus Rental in Chennai | AC & Non-AC Buses | Madurai Balaje Tours & Travels"
+        />
+
         <meta
           name="twitter:description"
           content="Trusted Chennai bus rental for AC & Non-AC coaches. Tourist bus rental Chennai, wedding, corporate, and outstation bus hire in Chennai with transparent pricing and professional drivers."
@@ -78,15 +113,27 @@ export default function Home() {
       </Helmet>
 
       <Hero />
+
       <SeoIntro />
+
       <LocalTariff />
+
       <Packages />
+
       <Occasions />
+
       <Gallery />
+
       <AreasPreview />
+
       <WhyUs />
+
       <Testimonials />
+
       <Contact />
+
+      {/* Quick Query Popup */}
+      <QuickQueryPopup />
     </>
   );
 }

@@ -1,124 +1,330 @@
-<?php
-/**
- * send-mail.php
- * Receives the booking form via POST (fetch/AJAX from the React site)
- * and emails it straight to the business using PHPMailer over SMTP
- * (Gmail SMTP) — far more reliable than PHP's built-in mail(), which
- * often lands in spam or gets silently blocked by the host.
- *
- * SETUP (one-time):
- * 1. Turn on 2-Step Verification on the Gmail account that will SEND
- *    the mail: https://myaccount.google.com/security
- * 2. Create an "App Password": https://myaccount.google.com/apppasswords
- *    (choose app: Mail, device: Other -> name it "Website")
- *    Google gives you a 16-character password like: abcd efgh ijkl mnop
- * 3. Paste that value into SMTP_PASSWORD below (remove the spaces).
- * 4. Set SMTP_USERNAME to the Gmail address you generated the app
- *    password for (it can be the same as SEND_TO, or a different
- *    Gmail account used only for sending).
- */
 
-require __DIR__ . '/phpmailer/src/Exception.php';
-require __DIR__ . '/phpmailer/src/PHPMailer.php';
-require __DIR__ . '/phpmailer/src/SMTP.php';
+<?php
+
+declare(strict_types=1);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 
-// ---- SMTP CONFIG — fill these in ----
-const SMTP_HOST     = 'smtp.gmail.com';
-const SMTP_PORT     = 587;
-const SMTP_USERNAME = 'maduraibalajetourstravels@gmail.com'; // Gmail address that sends the mail
-const SMTP_PASSWORD = 'PASTE_YOUR_16_CHAR_APP_PASSWORD_HERE'; // Gmail App Password, no spaces
-const SEND_TO       = 'maduraibalajetourstravels@gmail.com'; // where enquiries should land
+require_once __DIR__ . '/phpmailer/src/Exception.php';
+require_once __DIR__ . '/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/phpmailer/src/SMTP.php';
 
-// Allow only POST requests
+/**
+ * JSON response helper
+ */
+function jsonResponse(
+    int $status,
+    array $data
+): void {
+    http_response_code($status);
+
+    echo json_encode(
+        $data,
+        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+    );
+
+    exit;
+}
+
+/**
+ * Read environment configuration
+ */
+function envValue(string $key, string $default = ''): string
+{
+    $value = getenv($key);
+
+    return $value !== false ? trim($value) : $default;
+}
+
+/**
+ * Only accept POST requests
+ */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
-    exit;
+    jsonResponse(405, [
+        'success' => false,
+        'message' => 'Invalid request method.',
+    ]);
 }
 
-// Simple honeypot spam trap — a real visitor never fills this hidden field
-if (!empty($_POST['website'])) {
-    echo json_encode(['success' => true]);
-    exit;
+/**
+ * Read request data.
+ * Supports FormData, URL-encoded forms and JSON.
+ */
+$data = $_POST;
+
+if (empty($data)) {
+    $rawInput = file_get_contents('php://input');
+
+    if ($rawInput !== false && $rawInput !== '') {
+        $jsonData = json_decode($rawInput, true);
+
+        if (is_array($jsonData)) {
+            $data = $jsonData;
+        } else {
+            parse_str($rawInput, $parsedData);
+
+            if (is_array($parsedData)) {
+                $data = $parsedData;
+            }
+        }
+    }
 }
 
-// ---- Read & sanitize fields ----
-$name       = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
-$phone      = isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : '';
-$travelDate = isset($_POST['travelDate']) ? trim(strip_tags($_POST['travelDate'])) : '';
-$message    = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
+/**
+ * Honeypot spam protection
+ */
+if (!empty($data['website'])) {
+    jsonResponse(200, [
+        'success' => true,
+        'message' => 'Your enquiry has been received.',
+    ]);
+}
 
+/**
+ * Sanitize form fields
+ */
+$name = trim(strip_tags((string) ($data['name'] ?? '')));
+
+$phone = trim(strip_tags((string) ($data['phone'] ?? '')));
+
+$email = trim((string) ($data['email'] ?? ''));
+
+$travelDate = trim(
+    strip_tags((string) ($data['travelDate'] ?? ''))
+);
+
+$message = trim(
+    strip_tags((string) ($data['message'] ?? ''))
+);
+
+/**
+ * Validate required fields
+ */
 $errors = [];
+
 if ($name === '') {
     $errors[] = 'name';
 }
+
 if ($phone === '') {
     $errors[] = 'phone';
 }
+
 if ($message === '') {
     $errors[] = 'message';
 }
 
-if (!empty($errors)) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please fill in all required fields (name, phone, and trip details).',
-        'fields'  => $errors,
-    ]);
-    exit;
+if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'email';
 }
 
+if (!empty($errors)) {
+    jsonResponse(400, [
+        'success' => false,
+        'message' => 'Please fill in all required fields.',
+        'fields' => $errors,
+    ]);
+}
+
+/**
+ * SMTP configuration
+ *
+ * Configure these environment variables in your hosting environment.
+ */
+$smtpHost = envValue(
+    'MADURAI_SMTP_HOST',
+    'smtp.gmail.com'
+);
+
+$smtpPort = (int) envValue(
+    'MADURAI_SMTP_PORT',
+    '587'
+);
+
+$smtpUsername = envValue('MADURAI_SMTP_USER');
+
+$smtpPassword = envValue('MADURAI_SMTP_PASSWORD');
+
+$sendTo = envValue(
+    'COMPANY_ADMIN_EMAIL',
+    $smtpUsername
+);
+
+$fromEmail = envValue(
+    'MADURAI_SMTP_FROM',
+    $smtpUsername
+);
+
+$fromName = envValue(
+    'MADURAI_SMTP_FROM_NAME',
+    'Madurai Balaje Tours & Travels'
+);
+
+if (
+    $smtpUsername === '' ||
+    $smtpPassword === '' ||
+    $sendTo === '' ||
+    !filter_var($smtpUsername, FILTER_VALIDATE_EMAIL) ||
+    !filter_var($sendTo, FILTER_VALIDATE_EMAIL) ||
+    !filter_var($fromEmail, FILTER_VALIDATE_EMAIL)
+) {
+    error_log('Madurai Balaje SMTP configuration is incomplete.');
+
+    jsonResponse(500, [
+        'success' => false,
+        'message' => 'Email service is temporarily unavailable.',
+    ]);
+}
+
+/**
+ * Prepare email
+ */
 $subject = 'Bus Booking Enquiry - ' . $name;
 
-$bodyText  = "New booking enquiry from the website:\n\n";
-$bodyText .= "Name: $name\n";
-$bodyText .= "Phone: $phone\n";
-if ($travelDate !== '') {
-    $bodyText .= "Travel date: $travelDate\n";
+$bodyText = "New booking enquiry from the website:\n\n";
+
+$bodyText .= "Name: {$name}\n";
+$bodyText .= "Phone: {$phone}\n";
+
+if ($email !== '') {
+    $bodyText .= "Email: {$email}\n";
 }
-$bodyText .= "\nTrip details:\n" . ($message !== '' ? $message : "I'd like to book a bus.") . "\n";
 
-$bodyHtml = '<p><strong>New booking enquiry from the website:</strong></p><ul>'
-    . '<li><strong>Name:</strong> ' . htmlspecialchars($name) . '</li>'
-    . '<li><strong>Phone:</strong> ' . htmlspecialchars($phone) . '</li>'
-    . ($travelDate !== '' ? '<li><strong>Travel date:</strong> ' . htmlspecialchars($travelDate) . '</li>' : '')
-    . '</ul><p><strong>Trip details:</strong><br>' . nl2br(htmlspecialchars($message !== '' ? $message : "I'd like to book a bus.")) . '</p>';
+if ($travelDate !== '') {
+    $bodyText .= "Travel date: {$travelDate}\n";
+}
 
+$bodyText .= "\nTrip details:\n";
+$bodyText .= $message . "\n";
+
+/**
+ * HTML email
+ */
+$bodyHtml = '
+<html>
+<body>
+    <h3>New booking enquiry from the website</h3>
+
+    <table cellpadding="8" cellspacing="0" border="1">
+        <tr>
+            <td><strong>Name</strong></td>
+            <td>' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '</td>
+        </tr>
+
+        <tr>
+            <td><strong>Phone</strong></td>
+            <td>' . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . '</td>
+        </tr>
+
+        ' . (
+            $email !== ''
+                ? '<tr>
+                    <td><strong>Email</strong></td>
+                    <td>' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '</td>
+                   </tr>'
+                : ''
+        ) . '
+
+        ' . (
+            $travelDate !== ''
+                ? '<tr>
+                    <td><strong>Travel Date</strong></td>
+                    <td>' . htmlspecialchars($travelDate, ENT_QUOTES, 'UTF-8') . '</td>
+                   </tr>'
+                : ''
+        ) . '
+    </table>
+
+    <h3>Trip Details</h3>
+
+    <p>' . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . '</p>
+
+</body>
+</html>
+';
+
+/**
+ * Send email using PHPMailer
+ */
 $mail = new PHPMailer(true);
 
 try {
-    // Server settings
+
+    // SMTP settings
     $mail->isSMTP();
-    $mail->Host       = SMTP_HOST;
-    $mail->SMTPAuth   = true;
-    $mail->Username   = SMTP_USERNAME;
-    $mail->Password   = SMTP_PASSWORD;
+
+    $mail->Host = $smtpHost;
+
+    $mail->SMTPAuth = true;
+
+    $mail->Username = $smtpUsername;
+
+    $mail->Password = $smtpPassword;
+
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = SMTP_PORT;
 
-    // Sender / recipient
-    $mail->setFrom(SMTP_USERNAME, 'Madurai Balaje Website');
-    $mail->addAddress(SEND_TO);
-    $mail->addReplyTo(SMTP_USERNAME, $name);
+    $mail->Port = $smtpPort;
 
-    // Content
+    $mail->CharSet = 'UTF-8';
+
+    // Sender
+    $mail->setFrom(
+        $fromEmail,
+        $fromName
+    );
+
+    // Recipient
+    $mail->addAddress($sendTo);
+
+    // Reply to customer if valid
+    if ($email !== '') {
+        $mail->addReplyTo($email, $name);
+    } else {
+        $mail->addReplyTo($smtpUsername, $name);
+    }
+
+    // Email content
     $mail->isHTML(true);
+
     $mail->Subject = $subject;
-    $mail->Body    = $bodyHtml;
+
+    $mail->Body = $bodyHtml;
+
     $mail->AltBody = $bodyText;
 
+    // Send
     $mail->send();
-    echo json_encode(['success' => true]);
+
+    jsonResponse(200, [
+        'success' => true,
+        'message' => 'Your enquiry has been received.',
+        'email_sent' => true,
+    ]);
+
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode([
+
+    error_log(
+        'Madurai Balaje email error: ' . $mail->ErrorInfo
+    );
+
+    jsonResponse(500, [
         'success' => false,
         'message' => 'Could not send email right now. Please try WhatsApp or call instead.',
+        'email_sent' => false,
+    ]);
+
+} catch (Throwable $e) {
+
+    error_log(
+        'Madurai Balaje server error: ' . $e->getMessage()
+    );
+
+    jsonResponse(500, [
+        'success' => false,
+        'message' => 'An unexpected server error occurred.',
+        'email_sent' => false,
     ]);
 }
